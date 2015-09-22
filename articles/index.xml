@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Articles on a technology journal</title>
-    <link>http://danielvalencia.me/articles/</link>
+    <link>http://danvalencia.github.io/articles/</link>
     <description>Recent content in Articles on a technology journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 08 Aug 2013 10:56:50 -0700</lastBuildDate>
-    <atom:link href="http://danielvalencia.me/articles/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://danvalencia.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Hands (Part I)</title>
-      <link>http://danielvalencia.me/articles/hands_part_1/</link>
+      <link>http://danvalencia.github.io/articles/hands_part_1/</link>
       <pubDate>Thu, 08 Aug 2013 10:56:50 -0700</pubDate>
       
-      <guid>http://danielvalencia.me/articles/hands_part_1/</guid>
+      <guid>http://danvalencia.github.io/articles/hands_part_1/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m currently helping my friend Dave Gertler to build his Burning Man art installation which is called &lt;a href=&#34;http://handsburningman.blogspot.com/&#34;&gt;&lt;strong&gt;Hands&lt;/strong&gt;&lt;/a&gt;.  Specifically I&amp;rsquo;ll be focusing on the electronics, which is a fairly big chunk of work.  In this post I&amp;rsquo;ll introduce you to the project and show you some of the work we&amp;rsquo;ve been doing to make this a reality.&lt;/p&gt;
@@ -72,10 +72,10 @@
     
     <item>
       <title>Closures and Scoping in Javascript</title>
-      <link>http://danielvalencia.me/articles/closures_and_scoping_in_javascript/</link>
+      <link>http://danvalencia.github.io/articles/closures_and_scoping_in_javascript/</link>
       <pubDate>Sat, 02 Feb 2013 10:53:43 -0700</pubDate>
       
-      <guid>http://danielvalencia.me/articles/closures_and_scoping_in_javascript/</guid>
+      <guid>http://danvalencia.github.io/articles/closures_and_scoping_in_javascript/</guid>
       <description>
 
 &lt;p&gt;Per Wikipedia, a Closure is:&lt;/p&gt;
@@ -253,10 +253,10 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
     
     <item>
       <title>A Performance Testing Methodology</title>
-      <link>http://danielvalencia.me/articles/a_performance_testing_methodology/</link>
+      <link>http://danvalencia.github.io/articles/a_performance_testing_methodology/</link>
       <pubDate>Mon, 29 Oct 2012 10:50:03 -0700</pubDate>
       
-      <guid>http://danielvalencia.me/articles/a_performance_testing_methodology/</guid>
+      <guid>http://danvalencia.github.io/articles/a_performance_testing_methodology/</guid>
       <description>
 
 &lt;p&gt;The primary goal of any web site performance testing and capacity planning activity is to know how many users can our system handle under acceptable response times given certain hardware specifications.  We can get this information by graphing a &lt;em&gt;concurrency&lt;/em&gt; vs &lt;em&gt;response time&lt;/em&gt; graph.&lt;/p&gt;
@@ -384,10 +384,10 @@ NConc = 0.74 users&lt;/p&gt;
     
     <item>
       <title>Notes On Continuous Delivery</title>
-      <link>http://danielvalencia.me/articles/notes_on_continuous_delivery/</link>
+      <link>http://danvalencia.github.io/articles/notes_on_continuous_delivery/</link>
       <pubDate>Tue, 23 Oct 2012 10:27:00 -0700</pubDate>
       
-      <guid>http://danielvalencia.me/articles/notes_on_continuous_delivery/</guid>
+      <guid>http://danvalencia.github.io/articles/notes_on_continuous_delivery/</guid>
       <description>
 
 &lt;h3 id=&#34;only-build-your-binaries-once:25c5d87dd7a1a67a9e7f788e26731411&#34;&gt;Only Build Your Binaries Once&lt;/h3&gt;

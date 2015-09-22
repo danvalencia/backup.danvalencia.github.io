@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascript on a technology journal</title>
-    <link>http://danielvalencia.me/tags/javascript/</link>
+    <link>http://danvalencia.github.io/tags/javascript/</link>
     <description>Recent content in Javascript on a technology journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 Feb 2013 10:53:43 -0700</lastBuildDate>
-    <atom:link href="http://danielvalencia.me/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://danvalencia.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Closures and Scoping in Javascript</title>
-      <link>http://danielvalencia.me/articles/closures_and_scoping_in_javascript/</link>
+      <link>http://danvalencia.github.io/articles/closures_and_scoping_in_javascript/</link>
       <pubDate>Sat, 02 Feb 2013 10:53:43 -0700</pubDate>
       
-      <guid>http://danielvalencia.me/articles/closures_and_scoping_in_javascript/</guid>
+      <guid>http://danvalencia.github.io/articles/closures_and_scoping_in_javascript/</guid>
       <description>
 
 &lt;p&gt;Per Wikipedia, a Closure is:&lt;/p&gt;
