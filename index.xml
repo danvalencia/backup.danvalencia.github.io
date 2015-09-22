@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>a technology journal</title>
-    <link>http://danvalencia.github.io/</link>
+    <link>http://danielvalencia.me/</link>
     <description>Recent content on a technology journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 08 Aug 2013 10:56:50 -0700</lastBuildDate>
-    <atom:link href="http://danvalencia.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://danielvalencia.me/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Hands (Part I)</title>
-      <link>http://danvalencia.github.io/articles/hands_part_1/</link>
+      <link>http://danielvalencia.me/articles/hands_part_1/</link>
       <pubDate>Thu, 08 Aug 2013 10:56:50 -0700</pubDate>
       
-      <guid>http://danvalencia.github.io/articles/hands_part_1/</guid>
+      <guid>http://danielvalencia.me/articles/hands_part_1/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m currently helping my friend Dave Gertler to build his Burning Man art installation which is called &lt;a href=&#34;http://handsburningman.blogspot.com/&#34;&gt;&lt;strong&gt;Hands&lt;/strong&gt;&lt;/a&gt;.  Specifically I&amp;rsquo;ll be focusing on the electronics, which is a fairly big chunk of work.  In this post I&amp;rsquo;ll introduce you to the project and show you some of the work we&amp;rsquo;ve been doing to make this a reality.&lt;/p&gt;
@@ -72,10 +72,10 @@
     
     <item>
       <title>Closures and Scoping in Javascript</title>
-      <link>http://danvalencia.github.io/articles/closures_and_scoping_in_javascript/</link>
+      <link>http://danielvalencia.me/articles/closures_and_scoping_in_javascript/</link>
       <pubDate>Sat, 02 Feb 2013 10:53:43 -0700</pubDate>
       
-      <guid>http://danvalencia.github.io/articles/closures_and_scoping_in_javascript/</guid>
+      <guid>http://danielvalencia.me/articles/closures_and_scoping_in_javascript/</guid>
       <description>
 
 &lt;p&gt;Per Wikipedia, a Closure is:&lt;/p&gt;
@@ -253,10 +253,10 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
     
     <item>
       <title>A Performance Testing Methodology</title>
-      <link>http://danvalencia.github.io/articles/a_performance_testing_methodology/</link>
+      <link>http://danielvalencia.me/articles/a_performance_testing_methodology/</link>
       <pubDate>Mon, 29 Oct 2012 10:50:03 -0700</pubDate>
       
-      <guid>http://danvalencia.github.io/articles/a_performance_testing_methodology/</guid>
+      <guid>http://danielvalencia.me/articles/a_performance_testing_methodology/</guid>
       <description>
 
 &lt;p&gt;The primary goal of any web site performance testing and capacity planning activity is to know how many users can our system handle under acceptable response times given certain hardware specifications.  We can get this information by graphing a &lt;em&gt;concurrency&lt;/em&gt; vs &lt;em&gt;response time&lt;/em&gt; graph.&lt;/p&gt;
@@ -384,10 +384,10 @@ NConc = 0.74 users&lt;/p&gt;
     
     <item>
       <title>Notes On Continuous Delivery</title>
-      <link>http://danvalencia.github.io/articles/notes_on_continuous_delivery/</link>
+      <link>http://danielvalencia.me/articles/notes_on_continuous_delivery/</link>
       <pubDate>Tue, 23 Oct 2012 10:27:00 -0700</pubDate>
       
-      <guid>http://danvalencia.github.io/articles/notes_on_continuous_delivery/</guid>
+      <guid>http://danielvalencia.me/articles/notes_on_continuous_delivery/</guid>
       <description>
 
 &lt;h3 id=&#34;only-build-your-binaries-once:25c5d87dd7a1a67a9e7f788e26731411&#34;&gt;Only Build Your Binaries Once&lt;/h3&gt;
@@ -431,13 +431,13 @@ NConc = 0.74 users&lt;/p&gt;
     
     <item>
       <title></title>
-      <link>http://danvalencia.github.io/about/resume/</link>
+      <link>http://danielvalencia.me/about/resume/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://danvalencia.github.io/about/resume/</guid>
+      <guid>http://danielvalencia.me/about/resume/</guid>
       <description>
 
-&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://danvalencia.github.io/about/daniel-valencia-resume.pdf&#34;&gt;Click to download PDF version of my resume&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://danielvalencia.me/about/daniel-valencia-resume.pdf&#34;&gt;Click to download PDF version of my resume&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;daniel-valencia-software-engineer:c59a67a3c7bc5faa453847420267045e&#34;&gt;Daniel Valencia, Software Engineer&lt;/h2&gt;
 
@@ -610,15 +610,15 @@ NConc = 0.74 users&lt;/p&gt;
     
     <item>
       <title>About me</title>
-      <link>http://danvalencia.github.io/about/me/</link>
+      <link>http://danielvalencia.me/about/me/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://danvalencia.github.io/about/me/</guid>
+      <guid>http://danielvalencia.me/about/me/</guid>
       <description>
 
 &lt;p&gt;I&amp;rsquo;m an experienced software developer from &lt;a href=&#34;http://en.wikipedia.org/wiki/Ensenada,_Baja_California&#34;&gt;Ensenada, México&lt;/a&gt;, currently residing in San Francisco, CA. I&amp;rsquo;d say curiosity is one of my biggest strengths, and that has helped me get involved in the entire software development stack: from frontend, backend, and mobile app development to infrastructure engineering, QA, and performance testing. I&amp;rsquo;m a technologist at heart who loves solving hard problems; I&amp;rsquo;m a generalist who believes in using the right tool for the job. Building things is what I enjoy the most.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://danvalencia.github.io/about/resume&#34;&gt;Click here to view my full resume&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://danielvalencia.me/about/resume&#34;&gt;Click here to view my full resume&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;my-professional-career:bb648bec966dae0af211bdd2f5351101&#34;&gt;My Professional Career&lt;/h3&gt;
 
@@ -634,7 +634,7 @@ NConc = 0.74 users&lt;/p&gt;
 
 &lt;h3 id=&#34;side-projects:bb648bec966dae0af211bdd2f5351101&#34;&gt;Side Projects&lt;/h3&gt;
 
-&lt;p&gt;My curiosity has also helped me get involved in a number of interesting side projects. Most notably I participated on a Burning Man art installation (&lt;a href=&#34;http://www.rollingstone.com/culture/pictures/burning-man-2013-the-people-20130905/stiltwalkers-0795928&#34;&gt;Hands by Dave Gertler&lt;/a&gt;). I worked on the wiring and installation for the ligthing and was in charge of writing the firmware.  I also wrote an iPad app for controlling the LEDs using bluetooth technology.  You can read more about that on my &lt;a href=&#34;http://danvalencia.github.io/articles/hands_(part_i)&#34;&gt;blog posts&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;My curiosity has also helped me get involved in a number of interesting side projects. Most notably I participated on a Burning Man art installation (&lt;a href=&#34;http://www.rollingstone.com/culture/pictures/burning-man-2013-the-people-20130905/stiltwalkers-0795928&#34;&gt;Hands by Dave Gertler&lt;/a&gt;). I worked on the wiring and installation for the ligthing and was in charge of writing the firmware.  I also wrote an iPad app for controlling the LEDs using bluetooth technology.  You can read more about that on my &lt;a href=&#34;http://danielvalencia.me/articles/hands_(part_i)&#34;&gt;blog posts&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;My current side project is a cash monitoring system and web console for internet kiosks in México, using Java and Ruby on Rails.&lt;/p&gt;
 </description>
