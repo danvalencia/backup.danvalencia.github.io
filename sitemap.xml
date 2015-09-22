@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://danielvalencia.me/</loc>
+    <lastmod>2013-08-08T10:56:50-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://danielvalencia.me/articles/hands_part_1/</loc>
+    <lastmod>2013-08-08T10:56:50-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://danielvalencia.me/articles/closures_and_scoping_in_javascript/</loc>
+    <lastmod>2013-02-02T10:53:43-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://danielvalencia.me/articles/a_performance_testing_methodology/</loc>
+    <lastmod>2012-10-29T10:50:03-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://danielvalencia.me/articles/notes_on_continuous_delivery/</loc>
+    <lastmod>2012-10-23T10:27:00-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://danielvalencia.me/about/resume/</loc>
+  </url>
+  
+  <url>
+    <loc>http://danielvalencia.me/about/me/</loc>
+  </url>
+  
+</urlset>

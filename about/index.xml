@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on a technology journal</title>
+    <link>http://danielvalencia.me/about/</link>
+    <description>Recent content in Abouts on a technology journal</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://danielvalencia.me/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title></title>
+      <link>http://danielvalencia.me/about/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://danielvalencia.me/about/resume/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://danielvalencia.me/about/daniel-valencia-resume.pdf&#34;&gt;Click to download PDF version of my resume&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;daniel-valencia-software-engineer:c59a67a3c7bc5faa453847420267045e&#34;&gt;Daniel Valencia, Software Engineer&lt;/h2&gt;
+
+&lt;h3 id=&#34;professional-summary:c59a67a3c7bc5faa453847420267045e&#34;&gt;Professional Summary&lt;/h3&gt;
+
+&lt;p&gt;Daniel has over seven years of experience as a software engineer and technical lead across multiple projects. Daniel’s strength lies on his breadth of knowledge across the development stack:  UI, mobile app development, backend development, infrastructure engineering, QA and performance/load testing.  Daniel has strong expertise in Java based web application development in the ecommerce space, and he&amp;rsquo;s proficient in other platforms such as Ruby on Rails and iOS.  He develops code using industry best practices such as Continuous Integration, TDD and code analysis, always treating Software Development as a craft.&lt;/p&gt;
+
+&lt;h3 id=&#34;senior-software-engineer-tacit-knowledge-inc-san-francisco-ca-2011-present:c59a67a3c7bc5faa453847420267045e&#34;&gt;&lt;em&gt;Senior Software Engineer&lt;/em&gt;, Tacit Knowledge Inc., San Francisco, CA (2011 - Present)&lt;/h3&gt;
+
+&lt;h4 id=&#34;target-ipad-app-redesign:c59a67a3c7bc5faa453847420267045e&#34;&gt;Target, iPad App Redesign&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Tech lead for one of 2 scrum teams responsible for the implementation of the redesign of Target&amp;rsquo;s flagship iPad app.&lt;/li&gt;
+&lt;li&gt;App was successfuly launched on time and was directly responsible for huge gains in conversion rates (3x) and revenue (2x) during Black Friday, compared to last year.&lt;/li&gt;
+&lt;li&gt;Built features including: new popover based categories navigation, services menu, category landing pages, and weekly ad grid.&lt;/li&gt;
+&lt;li&gt;Performed code review of their entire codebase with focus on coding best practices (OOP, UI, etc).&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Stabilized the app by fixing memory leaks, and main bugs.&lt;/li&gt;
+&lt;li&gt;Assessed and made recommendations for tools for unit testing, UI testing, cloud based functional testing, static analysis and dependency management.&lt;/li&gt;
+&lt;li&gt;Implemented the base framework for UI testing using Appium with Ruby and RSpec.&lt;/li&gt;
+&lt;li&gt;Fixed around 150 legacy broken test cases.&lt;/li&gt;
+&lt;li&gt;Worked closely with Target’s devops engineers to implement an iOS continuous delivery pipeline.&lt;/li&gt;
+&lt;li&gt;Designed and worked close with engineers to implement feature toggles in the app.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;audi-via-akqa-progressive-retail:c59a67a3c7bc5faa453847420267045e&#34;&gt;Audi (via AKQA), Progressive Retail&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Tech lead and key contributor to the success of the pilot program as well as the national rollout for the Audi Sales Assist iOS application.&lt;/li&gt;
+&lt;li&gt;Finished project on date and under budget, with praise from both the client and the end users (Audi USA dealers).&lt;/li&gt;
+&lt;li&gt;Led architecture design and development of an Adobe AEM (CQ5) backed mobile app for Audi USA Dealers with functionality such as side-by-side comparison of cars and model and feature catalog.&lt;/li&gt;
+&lt;li&gt;Designed and implemented backend components for consuming external web service for car comparison functionality.&lt;/li&gt;
+&lt;li&gt;Contributed to key frontend functionality and bug fixes using Javascript and Objective-C.&lt;/li&gt;
+&lt;li&gt;Coached and mentored team members.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;nike-library-project:c59a67a3c7bc5faa453847420267045e&#34;&gt;Nike, Library Project&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Developed and executed performance testing strategy for Nike’s Custom DAM solution.&lt;/li&gt;
+&lt;li&gt;Analysis, design, and execution of performance testing scripts using JMeter.&lt;/li&gt;
+&lt;li&gt;Wrote JCR-Mock framework for mocking of nodes on a JCR repository (&lt;a href=&#34;https://github.com/tacitknowledge/jcr-mock&#34;&gt;https://github.com/tacitknowledge/jcr-mock&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Used Vagrant and Chef to setup development environments.&lt;/li&gt;
+&lt;li&gt;CI and build process setup using Jenkins and Maven.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;software-engineer-tacit-knowledge-inc-guadalajara-méxico-2008-2011:c59a67a3c7bc5faa453847420267045e&#34;&gt;&lt;em&gt;Software Engineer&lt;/em&gt;, Tacit Knowledge Inc, Guadalajara, México (2008 - 2011)&lt;/h3&gt;
+
+&lt;h4 id=&#34;navigenics-flexible-billing-project:c59a67a3c7bc5faa453847420267045e&#34;&gt;Navigenics, Flexible Billing Project&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Led architecture design for flexible billing enhancements to Navigenics existing ecommerce platform.&lt;/li&gt;
+&lt;li&gt;Provided guidance and mentoring to team that spanned across several of our offices in Mexico, Moldova and the US.&lt;/li&gt;
+&lt;li&gt;Technologies used:  Apache Wicket, Google Guice, Hibernate, Spring, Maven, MySQL 5.1.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;heb-click-and-brick:c59a67a3c7bc5faa453847420267045e&#34;&gt;HEB, Click and Brick&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Implementation of ecommerce backend services for HEB’s website.&lt;/li&gt;
+&lt;li&gt;Implemented communication with POS systems via JMS Message Bus.&lt;/li&gt;
+&lt;li&gt;Implementation of ATG content personalization (via content targeters).&lt;/li&gt;
+&lt;li&gt;Technologies used: ATG, Tibco message bus.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;converse-fast-follows:c59a67a3c7bc5faa453847420267045e&#34;&gt;Converse, Fast Follows&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Tech lead for offsore development team for new content features for converse.com.&lt;/li&gt;
+&lt;li&gt;Implemented new content cartridges using Endeca&amp;rsquo;s PageBuilder tool.&lt;/li&gt;
+&lt;li&gt;Provided technical guidance and mentoring for team developers.&lt;/li&gt;
+&lt;li&gt;Technologies used: Endeca (Page Builder), .NET, .NET MVC 2, NHibernate, T-SQL, Slideshow Pro.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;converse-site-refresh:c59a67a3c7bc5faa453847420267045e&#34;&gt;Converse, Site Refresh&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Implemented backend services for the redesign of converse.com.&lt;/li&gt;
+&lt;li&gt;Designed and implemented APIs for faceted navigation and search using Endeca search engine on top of existing .NET platform.&lt;/li&gt;
+&lt;li&gt;Technologies used: Endeca, ASP.NET (C#), T-SQL, shell script.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;williams-sonoma-inc-wcm:c59a67a3c7bc5faa453847420267045e&#34;&gt;Williams-Sonoma Inc., WCM&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Designed and implemented back-end solution for WSI’s brands, using Day’s CQ5 Content Management System.&lt;/li&gt;
+&lt;li&gt;Wrote workflow components and JCR Listeners in CQ5.&lt;/li&gt;
+&lt;li&gt;Development of advanced CQ5 components like bulk editor for operating on multiple skus.&lt;/li&gt;
+&lt;li&gt;Wrote content migration scripts.&lt;/li&gt;
+&lt;li&gt;Technologies used: CQ5, OSGi, JCR, ExtJS.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;kodak-gallery-slideshow:c59a67a3c7bc5faa453847420267045e&#34;&gt;Kodak Gallery, Slideshow&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Developed Kodak Gallery’s Slideshow using Adobe Flex as a frontend platform and J2EE for the backend services.&lt;/li&gt;
+&lt;li&gt;Created Flex UI on top of the cairngorm microarchitecture.&lt;/li&gt;
+&lt;li&gt;Created backend services using Webwork framework.&lt;/li&gt;
+&lt;li&gt;Technologies used: J2EE, Java Webwork, Pico container for DI, Adobe Flex, Cairngorm.&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;software-engineer-softtek-aguascalientes-méxico-2007-2008:c59a67a3c7bc5faa453847420267045e&#34;&gt;&lt;em&gt;Software Engineer&lt;/em&gt;, Softtek, Aguascalientes, México (2007 - 2008)&lt;/h3&gt;
+
+&lt;h4 id=&#34;general-electric-site-builder-2-cms:c59a67a3c7bc5faa453847420267045e&#34;&gt;General Electric, Site Builder 2 CMS&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Developed &lt;em&gt;Site Builder 2&lt;/em&gt; internal CMS web application for General Electric.&lt;/li&gt;
+&lt;li&gt;Fronted built using Adobe Flex 3.&lt;/li&gt;
+&lt;li&gt;Wrote backend XML web services using Java.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;software-engineer-qa-engineer-ibm-méxico-2006-2007:c59a67a3c7bc5faa453847420267045e&#34;&gt;&lt;em&gt;Software Engineer, QA Engineer&lt;/em&gt;, IBM, México (2006 - 2007)&lt;/h3&gt;
+
+&lt;h4 id=&#34;as400-commands-development-and-maintenance:c59a67a3c7bc5faa453847420267045e&#34;&gt;AS400 Commands Development and Maintenance&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Maintenance owner for AS400 commands: RTVDSKINF, PRTDSKINF, RTVDIRINF, PRTDIRINF.&lt;/li&gt;
+&lt;li&gt;Fixed bugs and implemented new features, using a combination of the following languages: C++, CL, SQL, PLMI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;open-source:c59a67a3c7bc5faa453847420267045e&#34;&gt;Open Source&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;m the main author and maintainer for the &lt;a href=&#34;https://github.com/tacitknowledge/jcr-mock&#34;&gt;JCR-Mock&lt;/a&gt; library for mocking JCR compliant repositories.&lt;/p&gt;
+
+&lt;h3 id=&#34;external-projects:c59a67a3c7bc5faa453847420267045e&#34;&gt;External Projects&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Burning Man 2013 “Hands” Art Installation&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Single handedly designed and build electronics using Arduino prototyping platform and individually addressable LEDs.&lt;/li&gt;
+&lt;li&gt;Implemented system to communicate Arduino microcontrollers with iOS devices using RedBear Labs’ BLE Shield.&lt;/li&gt;
+&lt;li&gt;Wrote iOS application to interface with LEDs by means of sending commands via Bluetooth.&lt;/li&gt;
+&lt;li&gt;Wrote iOS custom drawing UI using Core Graphics library to interface with LEDs via Bluetooth (&lt;a href=&#34;https://vimeo.com/72212981&#34;&gt;https://vimeo.com/72212981&lt;/a&gt;).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Maquinet Cash Monitor&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Cash monitor for internet kiosks, comprised of two components: a daemon which runs in the kiosk (written in Java) and a web application (written in Ruby on Rails).&lt;/li&gt;
+&lt;li&gt;Responsive web site with dashboard with graphs built with D3.js (nvd3).&lt;/li&gt;
+&lt;li&gt;Created Vagrant setup using chef to configure and provision both development and production environments.&lt;/li&gt;
+&lt;li&gt;Kiosk authentication to server using SSL client certs.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;education-training:c59a67a3c7bc5faa453847420267045e&#34;&gt;Education &amp;amp; Training&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bachelors degree in Electronic Engineering from ITESO (Western Institute of Technology and Higher Education) in Guadalajara, México.&lt;/li&gt;
+&lt;li&gt;Sun Certified Java Programmer (SCJP)&lt;/li&gt;
+&lt;li&gt;Proficient in the following technologies:
+
+&lt;ul&gt;
+&lt;li&gt;Java (JEE, J2SE), Ruby (Rails), Bash, Objective-C.&lt;/li&gt;
+&lt;li&gt;Linux, Mac OS X, Windows, iOS&lt;/li&gt;
+&lt;li&gt;SQL Server, MySQL, PostgreSQL&lt;/li&gt;
+&lt;li&gt;Adobe AEM (CQ5), Endeca, ATG&lt;/li&gt;
+&lt;li&gt;Javascript, Coffeescript, JQuery, D3.js, Ext JS&lt;/li&gt;
+&lt;li&gt;Chef, Vagrant, Jenkins&lt;/li&gt;
+&lt;li&gt;Git, SVN&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Current obsession:
+
+&lt;ul&gt;
+&lt;li&gt;iOS development with Swift.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>http://danielvalencia.me/about/me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://danielvalencia.me/about/me/</guid>
+      <description>
+
+&lt;p&gt;I&amp;rsquo;m an experienced software developer from &lt;a href=&#34;http://en.wikipedia.org/wiki/Ensenada,_Baja_California&#34;&gt;Ensenada, México&lt;/a&gt;, currently residing in San Francisco, CA. I&amp;rsquo;d say curiosity is one of my biggest strengths, and that has helped me get involved in the entire software development stack: from frontend, backend, and mobile app development to infrastructure engineering, QA, and performance testing. I&amp;rsquo;m a technologist at heart who loves solving hard problems; I&amp;rsquo;m a generalist who believes in using the right tool for the job. Building things is what I enjoy the most.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;http://danielvalencia.me/about/resume&#34;&gt;Click here to view my full resume&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;my-professional-career:bb648bec966dae0af211bdd2f5351101&#34;&gt;My Professional Career&lt;/h3&gt;
+
+&lt;p&gt;I currently work at &lt;a href=&#34;http://www.tacitknowledge.com&#34;&gt;Tacit Knowledge Inc.&lt;/a&gt; in San Francisco where I work on ecommerce and content management projects for big retailers in the US and UK. Our main strength is our focus on quality and software development best practices. With Tacit I&amp;rsquo;ve had the opportunity to work with clients such as Target, Nike, Converse, Williams Sonoma and Kodak, to name a few.&lt;/p&gt;
+
+&lt;p&gt;During my career I&amp;rsquo;ve been mostly involved in Java based web application development, but I&amp;rsquo;m also proficient in other platforms such as Ruby on Rails. Over the last couple of years I&amp;rsquo;ve been focusing more on iOS projects, which has reignited my joy for programming.  I was tech lead and key contributor for the redesign of the &lt;a href=&#34;https://itunes.apple.com/us/app/target-for-ipad/id402742793?mt=8_&#34;&gt;Target for iPad app&lt;/a&gt; which we released to the app store in November 2014. The app was very well received by the public in general (4 stars) as well as by the media.&lt;/p&gt;
+
+&lt;p&gt;In what it seems like a past life, I worked at &lt;a href=&#34;http://www.softtek.com/&#34;&gt;Softtek&lt;/a&gt; writing Adobe Flex applications and before that I worked at &lt;a href=&#34;http://www.ibm.com/mx/es/&#34;&gt;IBM&lt;/a&gt; maintaining AS400 legacy commands.&lt;/p&gt;
+
+&lt;h3 id=&#34;open-source:bb648bec966dae0af211bdd2f5351101&#34;&gt;Open Source&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;m the main author and maintainer for the &lt;a href=&#34;https://github.com/tacitknowledge/jcr-mock&#34;&gt;JCR-Mock&lt;/a&gt; library for mocking JCR compliant repositories.&lt;/p&gt;
+
+&lt;h3 id=&#34;side-projects:bb648bec966dae0af211bdd2f5351101&#34;&gt;Side Projects&lt;/h3&gt;
+
+&lt;p&gt;My curiosity has also helped me get involved in a number of interesting side projects. Most notably I participated on a Burning Man art installation (&lt;a href=&#34;http://www.rollingstone.com/culture/pictures/burning-man-2013-the-people-20130905/stiltwalkers-0795928&#34;&gt;Hands by Dave Gertler&lt;/a&gt;). I worked on the wiring and installation for the ligthing and was in charge of writing the firmware.  I also wrote an iPad app for controlling the LEDs using bluetooth technology.  You can read more about that on my &lt;a href=&#34;http://danielvalencia.me/articles/hands_(part_i)&#34;&gt;blog posts&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;My current side project is a cash monitoring system and web console for internet kiosks in México, using Java and Ruby on Rails.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
