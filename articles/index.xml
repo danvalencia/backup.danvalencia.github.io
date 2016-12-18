@@ -1,13 +1,331 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Articles on a technology journal</title>
-    <link>http://danielvalencia.me/articles/</link>
-    <description>Recent content in Articles on a technology journal</description>
+    <title>Articles-rsses on a technology journal</title>
+    <link>http://danielvalencia.me/articles/index.xml</link>
+    <description>Recent content in Articles-rsses on a technology journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2013 10:56:50 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 25 Oct 2016 10:27:00 -0700</lastBuildDate>
     <atom:link href="http://danielvalencia.me/articles/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Running JShell with Docker</title>
+      <link>http://danielvalencia.me/articles/running_jshell_with_docker/</link>
+      <pubDate>Tue, 25 Oct 2016 10:27:00 -0700</pubDate>
+      
+      <guid>http://danielvalencia.me/articles/running_jshell_with_docker/</guid>
+      <description>&lt;p&gt;One of the features I&amp;rsquo;m more excited about Java 9, is JShell. While it&amp;rsquo;s possible to have multiple JDKs on you local machine, I wanted to have a play around with it but didn&amp;rsquo;t want to mess around with my Mac environment. I&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implementing SSO with hybris</title>
+      <link>http://danielvalencia.me/articles/implementing_sso_with_hybris/</link>
+      <pubDate>Tue, 20 Oct 2015 10:50:03 -0700</pubDate>
+      
+      <guid>http://danielvalencia.me/articles/implementing_sso_with_hybris/</guid>
+      <description>
+
+&lt;p&gt;This is the story of how I implemented Single Sign-On (SSO) functionality with &lt;a href=&#34;https://www.hybris.com/en/&#34;&gt;hybris&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;the-requirements&#34;&gt;The Requirements&lt;/h3&gt;
+
+&lt;p&gt;When the client requested us to implement SSO functionality with hybris there didn&amp;rsquo;t provide much details besides the Identity Provider (IdP) of choice, which was &lt;a href=&#34;http://okta.com&#34;&gt;Okta&lt;/a&gt;. The client had already implemented SSO for other applications (namely &lt;a href=&#34;http://widen.com&#34;&gt;Widen&lt;/a&gt;, a cloud base DAM), and given that there was zero experience doing this with hybris we were somehow convinced that it was an easy feature to implement (mistake #1).&lt;/p&gt;
+
+&lt;p&gt;After digging around and asking some more questions, we concluded that we needed to implement the following features:
+- Enable IdP initiated SSO functionality for all hybris cockpits.
+- We must have feature toggling enabled for SSO, as we want to choose the environments that should have SSO. For example, local dev environments, CI environment should have SSO toggled off.
+- User/group information lived in Active Directory and would be handled solely by the IT department.
+- No direct access to LDAP would be provided, so we couldn&amp;rsquo;t leverage the hybris LDAP extension to sync user/group information.&lt;/p&gt;
+
+&lt;h3 id=&#34;saml-primer&#34;&gt;SAML Primer&lt;/h3&gt;
+
+&lt;p&gt;The first thing I had to do is familiarize myself with SAML (Security Assertion Markup Language), which is both a protocol and an XML based markup language.&lt;/p&gt;
+
+&lt;p&gt;The main concepts of SAML is that there&amp;rsquo;s the concept of an Identity Provider (IdP), and a Service Provider (SP).&lt;/p&gt;
+
+&lt;p&gt;IdPs are the systems in charge of authenticating users. They typically sit in front of a directory service such as Active Directory or LDAP. SPs are the applications that are secured with the SSO solution. In this case, hybris is the SP and Okta is the IdP.&lt;/p&gt;
+
+&lt;p&gt;Authentication happens by doing a series of browser intermediated HTTP requests, with SAML payload called Assertions. The payload is encrypted using private/public key pair encryption on both ways. The following Wikipedia image depicts the flow nicely:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Saml2-browser-sso-redirect-post.png/1280px-Saml2-browser-sso-redirect-post.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;There are a 2 types of authentication flows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IdP initiated authentication&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;SP initiated authentication&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In IdP initiated authentication the users log in to the system via an IdP webpage (typically a dashboard). Upon successful authentication the user is then redirected to the SP endpoint.&lt;/p&gt;
+
+&lt;p&gt;In SP initiated authentication, the user goes directly to the SP login page and enters her credentials there; she then gets redirected to the IdP&amp;rsquo;s authentication endpoint and, if access is granted, she again gets redirected back to the SP.&lt;/p&gt;
+
+&lt;p&gt;As you can see there&amp;rsquo;s an extra redirect in SP initiated flow; even with that extra step the user experience can be arguably better with SP initiated flows.&lt;/p&gt;
+
+&lt;h3 id=&#34;research&#34;&gt;Research&lt;/h3&gt;
+
+&lt;p&gt;In order to even start to think about how to implement SSO in hybris I had to dig into how hybris does authentication. Now, the first thing I found out is that each hybris web extension implements its own authentication mechanism:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;All cockpits (i.e. not the NG Cockpits) implement authentication using Spring Security, and leveraging the same Spring Security context files, which are referenced from the &lt;em&gt;cockpit&lt;/em&gt; extension under &lt;em&gt;classpath:cockpit/cockpit-spring-security.xml&lt;/em&gt;.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In turn, every cockpit typically overrides certain spring security configuration by specifying an additional configuration file, named &lt;em&gt;$COCKPIT_NAME-spring-security.xml&lt;/em&gt;, in its own classpath.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;hybris storefronts also use Spring Security for authentication, although the exact implementation differs a bit from the cockpit implementation.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;HAC and HMC do not use Spring Security, so SSO needs to be implemented in a different way.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;spring-security-primer&#34;&gt;Spring Security Primer&lt;/h3&gt;
+
+&lt;p&gt;There&amp;rsquo;s 2 things you need to setup initially for enabling Spring Security for your web application:
+1. First, you need to setup your context file via a context-param. For example, the &lt;em&gt;productcockpit&lt;/em&gt; extension&amp;rsquo;s spring configuration is setup in the following way:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;  &amp;lt;context-param&amp;gt;
+    &amp;lt;param-name&amp;gt;contextConfigLocation&amp;lt;/param-name&amp;gt;
+    &amp;lt;param-value&amp;gt;
+      classpath:productcockpit/productcockpit-spring-configs.xml
+    &amp;lt;/param-value&amp;gt;
+  &amp;lt;/context-param&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Then, you need to declare the &lt;em&gt;springSecurityFilter&lt;/em&gt;, again in web.xml file, like so:&lt;br /&gt;
+&lt;code&gt;xml
+&amp;lt;filter&amp;gt;
+&amp;lt;filter-name&amp;gt;springSecurityFilterChain&amp;lt;/filter-name&amp;gt;
+&amp;lt;filter-class&amp;gt;org.springframework.web.filter.DelegatingFilterProxy&amp;lt;/filter-class&amp;gt;
+&amp;lt;/filter&amp;gt;
+&amp;lt;filter-mapping&amp;gt;
+&amp;lt;filter-name&amp;gt;springSecurityFilterChain&amp;lt;/filter-name&amp;gt;
+&amp;lt;url-pattern&amp;gt;/*&amp;lt;/url-pattern&amp;gt;
+&amp;lt;/filter-mapping&amp;gt;
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;After setting up your &lt;em&gt;web.xml&lt;/em&gt; file you should be able to configure Spring Security directly in the spring configuration file.&lt;/p&gt;
+
+&lt;h4 id=&#34;the-most-simple-spring-security-configuration-possible&#34;&gt;The most simple Spring Security configuration possible&lt;/h4&gt;
+
+&lt;p&gt;Spring makes simple things easy, and complex tasks possible; Spring Security is no exception. In its most basic form, this is how a Spring Security configuration looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;  &amp;lt;security:http auto-config=&amp;quot;true&amp;quot;&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/admin**&amp;quot; access=&amp;quot;ROLE_USER&amp;quot; /&amp;gt;
+  &amp;lt;/security:http&amp;gt;
+
+  &amp;lt;security:authentication-manager&amp;gt;
+    &amp;lt;security:authentication-provider&amp;gt;
+       &amp;lt;security:user-service&amp;gt;
+  	    &amp;lt;security:user name=&amp;quot;dvalencia&amp;quot; password=&amp;quot;Pssword&amp;quot; authorities=&amp;quot;ROLE_USER&amp;quot; /&amp;gt;
+      &amp;lt;/security:user-service&amp;gt;
+    &amp;lt;/security:authentication-provider&amp;gt;
+  &amp;lt;/security:authentication-manager&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With these few lines of xml you get a lot for free:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You get a login page with logout functionality.&lt;/li&gt;
+&lt;li&gt;You get a user service where you can define users and even assign roles.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A few additional concepts to note here are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;security:http&amp;gt;&lt;/code&gt; tag: here you can define the authenticated paths, as well as paths allowed for anonymous access, such as asset paths, or login pages. You may declare have multiple &lt;code&gt;&amp;lt;security:http&amp;gt;&lt;/code&gt; configurations.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;security:authentication-manager&amp;gt;&lt;/code&gt; tag: This is where the magic happens; inside this tag is where you define an &lt;em&gt;authentication-provider&lt;/em&gt;, which is the main point of extension for Spring Security. In this example we&amp;rsquo;re simply declaring default &lt;em&gt;authentication-manager&lt;/em&gt; and &lt;em&gt;authentication-provider&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;spring-security-saml&#34;&gt;Spring Security SAML&lt;/h3&gt;
+
+&lt;p&gt;Everything&amp;rsquo;s all fine and dandy with the basic Spring Security sample. It get&amp;rsquo;s much more interesting (and kind of confusing to be honest) when using the &lt;a href=&#34;http://projects.spring.io/spring-security-saml/&#34;&gt;Spring Security SAML extension&lt;/a&gt;. The documentation is pretty comprehensive to be fair, but there&amp;rsquo;s so many concepts to understand that it can become very daunting.&lt;/p&gt;
+
+&lt;p&gt;The good thing is that there&amp;rsquo;s a &lt;a href=&#34;http://developer.okta.com/docs/guides/spring_security_saml.html&#34;&gt;great Okta + Spring Security SAML sample project&lt;/a&gt; which is exactly what I was looking for. So in order to implement the hybris SSO integration it was just a matter of configuring the cockpits to use the same approach as the sample app.&lt;/p&gt;
+
+&lt;h3 id=&#34;hybris-security-and-spring-security-saml&#34;&gt;hybris security and Spring Security SAML&lt;/h3&gt;
+
+&lt;p&gt;As I mentioned in the beginning of this post, one of the key requirements was to have the ability to turn on/off SSO by using some sort of configuration. This would mean that I would need to be able to support 2 authentication mechanisms:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hybris OOTB authentication&lt;/li&gt;
+&lt;li&gt;SAML authentication&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code&gt;&amp;lt;security:http&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;authentication-manager&amp;gt;&lt;/code&gt; configurations for hybris cockpits looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;security:http  access-denied-page=&amp;quot;/accessDenied.zul&amp;quot;&amp;gt;
+    &amp;lt;security:session-management session-authentication-strategy-ref=&amp;quot;fixation&amp;quot; /&amp;gt;
+    &amp;lt;security:anonymous key=&amp;quot;cockpitAnonymous&amp;quot; username=&amp;quot;anonymousUser&amp;quot; granted-authority=&amp;quot;ROLE_ANONYMOUS&amp;quot; /&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/login.zul&amp;quot; access=&amp;quot;IS_AUTHENTICATED_ANONYMOUSLY&amp;quot; /&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/zkau/**&amp;quot; access=&amp;quot;IS_AUTHENTICATED_ANONYMOUSLY&amp;quot; /&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/**&amp;quot; access=&amp;quot;IS_AUTHENTICATED_REMEMBERED&amp;quot; /&amp;gt;
+    &amp;lt;security:remember-me services-ref=&amp;quot;rememberMeServices&amp;quot; key=&amp;quot;cockpit&amp;quot; /&amp;gt;
+    &amp;lt;security:logout logout-success-url=&amp;quot;/index.zul&amp;quot; /&amp;gt;
+
+    &amp;lt;security:form-login always-use-default-target=&amp;quot;false&amp;quot; login-page=&amp;quot;/login.zul&amp;quot; authentication-failure-url=&amp;quot;/login.zul?login_error=1&amp;quot; /&amp;gt;
+&amp;lt;/security:http&amp;gt;
+
+&amp;lt;security:authentication-manager alias=&amp;quot;authenticationManager&amp;quot;&amp;gt;
+    &amp;lt;!-- Register authentication manager for SAML provider --&amp;gt;
+    &amp;lt;security:authentication-provider ref=&amp;quot;coreAuthenticationProvider&amp;quot;/&amp;gt;
+&amp;lt;/security:authentication-manager&amp;gt;
+
+&amp;lt;bean id=&amp;quot;coreAuthenticationProvider&amp;quot; class=&amp;quot;de.hybris.platform.cockpit.security.CockpitAuthenticationProvider&amp;quot;&amp;gt;
+    &amp;lt;property name=&amp;quot;preAuthenticationChecks&amp;quot; ref=&amp;quot;corePreAuthenticationChecks&amp;quot; /&amp;gt;
+    &amp;lt;property name=&amp;quot;userDetailsService&amp;quot; ref=&amp;quot;coreUserDetailsService&amp;quot; /&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The SAML version of the above hybris configuration looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;security:http entry-point-ref=&amp;quot;samlEntryPoint&amp;quot; use-expressions=&amp;quot;false&amp;quot;&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/zkau/**&amp;quot; access=&amp;quot;IS_AUTHENTICATED_ANONYMOUSLY&amp;quot; /&amp;gt;
+    &amp;lt;security:custom-filter before=&amp;quot;FIRST&amp;quot; ref=&amp;quot;metadataGeneratorFilter&amp;quot;/&amp;gt;
+    &amp;lt;security:custom-filter after=&amp;quot;BASIC_AUTH_FILTER&amp;quot; ref=&amp;quot;samlFilter&amp;quot;/&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/**&amp;quot; access=&amp;quot;IS_AUTHENTICATED_FULLY&amp;quot;/&amp;gt;
+    &amp;lt;security:logout success-handler-ref=&amp;quot;successLogoutHandler&amp;quot; /&amp;gt;
+&amp;lt;/security:http&amp;gt;
+
+&amp;lt;security:authentication-manager alias=&amp;quot;authenticationManager&amp;quot;&amp;gt;
+    &amp;lt;!-- Register authentication manager for SAML provider --&amp;gt;
+    &amp;lt;security:authentication-provider ref=&amp;quot;samlAuthenticationProvider&amp;quot;/&amp;gt;
+&amp;lt;/security:authentication-manager&amp;gt;
+
+&amp;lt;!-- SAML Authentication Provider responsible for validating of received SAML messages --&amp;gt;
+&amp;lt;bean id=&amp;quot;samlAuthenticationProvider&amp;quot; class=&amp;quot;org.springframework.security.saml.SAMLAuthenticationProvider&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Contrasting these 2 configurations and after testing things out more than once I came to the following conclusions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I needed to have a way to turn on/off &lt;code&gt;&amp;lt;security:http&amp;gt;&lt;/code&gt; configurations based on a property.&lt;/li&gt;
+&lt;li&gt;I needed to be able to have two &lt;code&gt;authentication-provider&lt;/code&gt;s: one for hybris auth and another one for SAML auth.&lt;/li&gt;
+&lt;li&gt;Additionally our &lt;code&gt;authentication-manager&lt;/code&gt; would need to
+choose the correct &lt;code&gt;authentication-provider&lt;/code&gt; based on the same property.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We were already using &lt;a href=&#34;https://github.com/tacitknowledge/flip&#34;&gt;Flip&lt;/a&gt; as a feature toggle framework, so it made sense to use this for switching SSO on and off as well.&lt;/p&gt;
+
+&lt;p&gt;After a lot more investigation I found that one could add a reference to a &lt;a href=&#34;http://docs.spring.io/spring-security/site/docs/3.1.x/apidocs/org/springframework/security/web/util/RequestMatcher.html&#34;&gt;RequestMatcher&lt;/a&gt; to the &lt;code&gt;&amp;lt;security:http&amp;gt;&lt;/code&gt; configuration. I could then use the RequestMatcher to enable or disable each one of the &lt;code&gt;&amp;lt;security:http&amp;gt;&lt;/code&gt; configs.
+I created the following implementation of a RequestMatcher:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class SstSecurityRequestMatcher implements RequestMatcher {
+    @Resource
+    private FeatureService featureService;
+
+    private boolean negateValue;
+
+    @Override
+    public boolean matches(HttpServletRequest httpServletRequest)
+    {
+        boolean featureEnabled = featureService.isFeatureEnabled(Features.COCKPIT_SSO);
+
+        if (negateValue)
+        {
+            featureEnabled = !featureEnabled;
+        }
+
+        return featureEnabled;
+    }
+
+    public void setNegateValue(boolean negateValue)
+    {
+        this.negateValue = negateValue;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, I created two &lt;code&gt;RequestMatcher&lt;/code&gt; bean definitions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;!-- This one is to enable the SAML http security --&amp;gt;
+&amp;lt;bean id=&amp;quot;samlSecurityRequestMatcher&amp;quot; class=&amp;quot;com.sst.core.security.SstSecurityRequestMatcher&amp;quot; /&amp;gt;
+
+&amp;lt;!-- This other one is a negated version of the RequestMatcher for enabling the hybris OOTB security--&amp;gt;
+&amp;lt;bean id=&amp;quot;hybrisSecurityRequestMatcher&amp;quot; class=&amp;quot;com.sst.core.security.SstSecurityRequestMatcher&amp;quot; &amp;gt;
+    &amp;lt;property name=&amp;quot;negateValue&amp;quot; value=&amp;quot;true&amp;quot; /&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With these beans in place I proceeded to configure the &lt;code&gt;request-matcher-ref&lt;/code&gt; for both of my &lt;code&gt;&amp;lt;http:security&amp;gt;&lt;/code&gt; configurations:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;!-- hybris OOTB Security Configuration --&amp;gt;
+&amp;lt;security:http  request-matcher-ref=&amp;quot;hybrisSecurityRequestMatcher&amp;quot; access-denied-page=&amp;quot;/accessDenied.zul&amp;quot;&amp;gt;
+    &amp;lt;security:session-management session-authentication-strategy-ref=&amp;quot;fixation&amp;quot; /&amp;gt;
+    &amp;lt;security:anonymous key=&amp;quot;cockpitAnonymous&amp;quot; username=&amp;quot;anonymousUser&amp;quot; granted-authority=&amp;quot;ROLE_ANONYMOUS&amp;quot; /&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/login.zul&amp;quot; access=&amp;quot;IS_AUTHENTICATED_ANONYMOUSLY&amp;quot; /&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/zkau/**&amp;quot; access=&amp;quot;IS_AUTHENTICATED_ANONYMOUSLY&amp;quot; /&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/**&amp;quot; access=&amp;quot;IS_AUTHENTICATED_REMEMBERED&amp;quot; /&amp;gt;
+    &amp;lt;security:remember-me services-ref=&amp;quot;rememberMeServices&amp;quot; key=&amp;quot;cockpit&amp;quot; /&amp;gt;
+    &amp;lt;security:logout logout-success-url=&amp;quot;/index.zul&amp;quot; /&amp;gt;
+    &amp;lt;security:form-login always-use-default-target=&amp;quot;false&amp;quot; login-page=&amp;quot;/login.zul&amp;quot; authentication-failure-url=&amp;quot;/login.zul?login_error=1&amp;quot; /&amp;gt;
+&amp;lt;/security:http&amp;gt;
+
+&amp;lt;!--Secured pages with SAML as entry point --&amp;gt;
+&amp;lt;security:http request-matcher-ref=&amp;quot;samlSecurityRequestMatcher&amp;quot; entry-point-ref=&amp;quot;samlEntryPoint&amp;quot; use-expressions=&amp;quot;false&amp;quot;&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/zkau/**&amp;quot; access=&amp;quot;IS_AUTHENTICATED_ANONYMOUSLY&amp;quot; /&amp;gt;
+    &amp;lt;security:custom-filter before=&amp;quot;FIRST&amp;quot; ref=&amp;quot;metadataGeneratorFilter&amp;quot;/&amp;gt;
+    &amp;lt;security:custom-filter after=&amp;quot;BASIC_AUTH_FILTER&amp;quot; ref=&amp;quot;samlFilter&amp;quot;/&amp;gt;
+    &amp;lt;security:intercept-url pattern=&amp;quot;/**&amp;quot; access=&amp;quot;IS_AUTHENTICATED_FULLY&amp;quot;/&amp;gt;
+    &amp;lt;security:logout success-handler-ref=&amp;quot;successLogoutHandler&amp;quot; /&amp;gt;
+&amp;lt;/security:http&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With these &lt;code&gt;request-matcher-ref&lt;/code&gt;s and using my feature toggle framework I was able to have both auth configurations in place, but only one of them active at a time.&lt;/p&gt;
+
+&lt;p&gt;The next step was to figure out a way to use the same feature toggle to configure the correct &lt;code&gt;AuthenticationProvider&lt;/code&gt;. I solved this by using a Spring factory bean, which would contain a reference to both the hybris and SSO &lt;code&gt;AuthenticationProvider&lt;/code&gt;s. I used the same feature toggle to return the right bean:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class SstAuthenticationProviderFactory
+{
+   @Resource
+   private FeatureService featureService;
+
+   @Resource
+   private AuthenticationProvider coreAuthenticationProvider;
+
+   @Resource
+   private AuthenticationProvider samlAuthenticationProvider;
+
+   public AuthenticationProvider createInstance()
+   {
+       if (featureService.isFeatureEnabled(Features.COCKPIT_SSO))
+       {
+           return samlAuthenticationProvider;
+       } else
+       {
+           return coreAuthenticationProvider;
+       }
+   }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And I declared both &lt;code&gt;AuthenticationProvider&lt;/code&gt;s and the &lt;code&gt;SstAuthenticationProviderFactory&lt;/code&gt; factory beans in the following way:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;!-- This bean acts like a single bean, and with the factory-bean and factory-method attributes
+     it will return the right instance based on our feature toggle--&amp;gt;
+&amp;lt;bean id=&amp;quot;authenticationProvider&amp;quot; factory-bean=&amp;quot;authenticationProviderFactory&amp;quot; factory-method=&amp;quot;createInstance&amp;quot;/&amp;gt;
+
+&amp;lt;!-- We declare our factory bean here, it gets wired by Spring annotations --&amp;gt;
+&amp;lt;bean id=&amp;quot;authenticationProviderFactory&amp;quot; class=&amp;quot;com.sst.core.security.SstAuthenticationProviderFactory&amp;quot;/&amp;gt;
+
+&amp;lt;!-- SAML Authentication Provider responsible for validating of received SAML messages --&amp;gt;
+&amp;lt;bean id=&amp;quot;samlAuthenticationProvider&amp;quot; class=&amp;quot;com.sst.core.security.SstSAMLAuthenticationProvider&amp;quot; /&amp;gt;
+
+&amp;lt;!-- hybris OOTB Authentication Provider--&amp;gt;
+&amp;lt;bean id=&amp;quot;coreAuthenticationProvider&amp;quot; class=&amp;quot;de.hybris.platform.cockpit.security.CockpitAuthenticationProvider&amp;quot;&amp;gt;
+    &amp;lt;property name=&amp;quot;preAuthenticationChecks&amp;quot; ref=&amp;quot;corePreAuthenticationChecks&amp;quot; /&amp;gt;
+    &amp;lt;property name=&amp;quot;userDetailsService&amp;quot; ref=&amp;quot;coreUserDetailsService&amp;quot; /&amp;gt;
+&amp;lt;/bean&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With those 2 changes in place, I was able to switch between normal authentication and SAML authentication.&lt;/p&gt;
+
+&lt;h3 id=&#34;challenges&#34;&gt;Challenges&lt;/h3&gt;
+
+&lt;h3 id=&#34;lessons-learned&#34;&gt;Lessons Learned&lt;/h3&gt;
+</description>
+    </item>
     
     <item>
       <title>Hands (Part I)</title>
@@ -19,7 +337,7 @@
 
 &lt;p&gt;I&amp;rsquo;m currently helping my friend Dave Gertler to build his Burning Man art installation which is called &lt;a href=&#34;http://handsburningman.blogspot.com/&#34;&gt;&lt;strong&gt;Hands&lt;/strong&gt;&lt;/a&gt;.  Specifically I&amp;rsquo;ll be focusing on the electronics, which is a fairly big chunk of work.  In this post I&amp;rsquo;ll introduce you to the project and show you some of the work we&amp;rsquo;ve been doing to make this a reality.&lt;/p&gt;
 
-&lt;h3 id=&#34;intro:deb9daccda79606df9da1aa7dd01da2c&#34;&gt;Intro&lt;/h3&gt;
+&lt;h3 id=&#34;intro&#34;&gt;Intro&lt;/h3&gt;
 
 &lt;p&gt;The installation consists of 2 hands with the palms facing upwards.  The hands will be made out of CDX plywood and the piece is designed to be assembled as a huge 3D jigsaw puzzle. In addition, multiple series of LEDs will illuminate the hands. Check out the following scale model to have a better idea of what it looks like:&lt;/p&gt;
 
@@ -36,7 +354,7 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 
-&lt;h3 id=&#34;the-electronics:deb9daccda79606df9da1aa7dd01da2c&#34;&gt;The Electronics&lt;/h3&gt;
+&lt;h3 id=&#34;the-electronics&#34;&gt;The Electronics&lt;/h3&gt;
 
 &lt;p&gt;The idea is that these Hands are illuminated with a series of LEDs that are individually addressable and can be programmed with different algorithms, similar to the &lt;a href=&#34;https://vimeo.com/25870560&#34;&gt;Bay Bridge Lights&lt;/a&gt;. Ok, probably not as sophisticated as the Bay Bridge Lights, but you get the idea.&lt;/p&gt;
 
@@ -52,7 +370,7 @@
 
 &lt;iframe src=&#34;http://player.vimeo.com/video/61054270&#34; width=&#34;500&#34; height=&#34;282&#34; frameborder=&#34;0&#34; webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt;
 
-&lt;h3 id=&#34;features-and-human-interaction:deb9daccda79606df9da1aa7dd01da2c&#34;&gt;Features and Human Interaction&lt;/h3&gt;
+&lt;h3 id=&#34;features-and-human-interaction&#34;&gt;Features and Human Interaction&lt;/h3&gt;
 
 &lt;p&gt;Human interaction is key for any Burning Man art installation and &lt;em&gt;Hands&lt;/em&gt; is no exception.  We thought about different ways in which people could interact with the LEDs. One thought we explored is the ability to control the LEDs via an iPhone or iPod.&lt;/p&gt;
 
@@ -192,7 +510,7 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
 
 &lt;p&gt;Sick, right ?&lt;/p&gt;
 
-&lt;h3 id=&#34;so-how-to-solve-this:08f3ab03952d0fba6b0e56ee042251be&#34;&gt;So, how to solve this?&lt;/h3&gt;
+&lt;h3 id=&#34;so-how-to-solve-this&#34;&gt;So, how to solve this?&lt;/h3&gt;
 
 &lt;p&gt;The key is to create a new scope for the &lt;em&gt;config&lt;/em&gt; variable.  As I mentioned previously, Javascript creates a new scope each time a function is created, so we can leverage this in the following way:&lt;/p&gt;
 
@@ -215,7 +533,7 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
 
 &lt;p&gt;Interesting, right ?&lt;/p&gt;
 
-&lt;h3 id=&#34;conclusion:08f3ab03952d0fba6b0e56ee042251be&#34;&gt;Conclusion&lt;/h3&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
 
 &lt;p&gt;Lots of languages have closures: obviously functional languages such as Scala, Haskell, Clojure, etc, but also Object Oriented languages such as Ruby, Python, and C#.  Even in Java you can achieve similar functionality with anonymous inner classes.  In all of these languages though, new scopes are created within blocks such as &lt;em&gt;for&lt;/em&gt; and &lt;em&gt;while&lt;/em&gt; loops.&lt;/p&gt;
 
@@ -269,7 +587,7 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
 
 &lt;p&gt;I will now go through a standard methodology for obtaining a graph like this.&lt;/p&gt;
 
-&lt;h3 id=&#34;performance-testing-concepts:c28dc0905f4751e20868ba42cc094c96&#34;&gt;Performance Testing Concepts&lt;/h3&gt;
+&lt;h3 id=&#34;performance-testing-concepts&#34;&gt;Performance Testing Concepts&lt;/h3&gt;
 
 &lt;p&gt;Let me start by defining some important concepts:&lt;/p&gt;
 
@@ -282,7 +600,7 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
 &lt;li&gt;&lt;strong&gt;Duration of Stay&lt;/strong&gt;: The average time a user spends in the system. Also called &lt;em&gt;wait time&lt;/em&gt; or &lt;em&gt;session duration&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;getting-useful-data:c28dc0905f4751e20868ba42cc094c96&#34;&gt;Getting Useful Data&lt;/h3&gt;
+&lt;h3 id=&#34;getting-useful-data&#34;&gt;Getting Useful Data&lt;/h3&gt;
 
 &lt;p&gt;The first thing to do is to obtain some data:&lt;/p&gt;
 
@@ -306,7 +624,7 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
 
 &lt;p&gt;We will also assume that the bulk of the visits happens in the course of 12 hours. Often you have to do this sort of adjustments. Again, for existing websites this can be obtained by analyzing access logs, but for new websites you can make assumptions.  For example, if you&amp;rsquo;re working on an e-commerce site that sells goods in the US, the bulk of your sales will likely happen during the day.&lt;/p&gt;
 
-&lt;h3 id=&#34;active-users:c28dc0905f4751e20868ba42cc094c96&#34;&gt;Active Users&lt;/h3&gt;
+&lt;h3 id=&#34;active-users&#34;&gt;Active Users&lt;/h3&gt;
 
 &lt;p&gt;The first thing we need to do is to calculate the number of active users (or &lt;em&gt;NActive&lt;/em&gt;) at any given time.  We can obtain this using &lt;a href=&#34;http://en.wikipedia.org/wiki/Little%27s_law&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Little&amp;rsquo;s Law&lt;/em&gt;&lt;/a&gt;:&lt;/p&gt;
 
@@ -333,7 +651,7 @@ NActive = 23 users&lt;/p&gt;
 
 &lt;p&gt;This means that on average, there are 23 users in the system, either waiting a response from the server or doing something else.  In other words, at any given time there are 23 &lt;em&gt;sessions&lt;/em&gt; on the server.&lt;/p&gt;
 
-&lt;h3 id=&#34;think-time:c28dc0905f4751e20868ba42cc094c96&#34;&gt;Think Time&lt;/h3&gt;
+&lt;h3 id=&#34;think-time&#34;&gt;Think Time&lt;/h3&gt;
 
 &lt;p&gt;If we know the average number of &lt;em&gt;requests per user&lt;/em&gt; (&lt;em&gt;rpu&lt;/em&gt;) and we know the average time each user spends in the site (W), calculating the average &lt;em&gt;think time&lt;/em&gt; (&lt;em&gt;Z&lt;/em&gt;) or time between requests is pretty straightforward:&lt;/p&gt;
 
@@ -345,7 +663,7 @@ Z = 30 sec&lt;/p&gt;
 
 &lt;p&gt;We will use this number for our &lt;em&gt;concurrency&lt;/em&gt; calculation.&lt;/p&gt;
 
-&lt;h3 id=&#34;nconc-or-concurrent-users:c28dc0905f4751e20868ba42cc094c96&#34;&gt;&lt;em&gt;NConc&lt;/em&gt; or concurrent users&lt;/h3&gt;
+&lt;h3 id=&#34;nconc-or-concurrent-users&#34;&gt;&lt;em&gt;NConc&lt;/em&gt; or concurrent users&lt;/h3&gt;
 
 &lt;p&gt;The number of concurrent users at any given time is a function of the number of active users and the percentage of time users are waiting for a request to complete.  Mathematically speaking:&lt;/p&gt;
 
@@ -353,7 +671,7 @@ Z = 30 sec&lt;/p&gt;
 &lt;p&gt;NConc = NActive( R / ( R+Z ) )&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;where &lt;em&gt;NConc&lt;/em&gt; is the number of &lt;em&gt;concurrent users_a at any given time, _NActive&lt;/em&gt; is the total number of users in the system, &lt;em&gt;R&lt;/em&gt; is the &lt;em&gt;service time&lt;/em&gt; and Z is the &lt;em&gt;think time&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;where &lt;em&gt;NConc&lt;/em&gt; is the number of _concurrent users_a at any given time, &lt;em&gt;NActive&lt;/em&gt; is the total number of users in the system, &lt;em&gt;R&lt;/em&gt; is the &lt;em&gt;service time&lt;/em&gt; and Z is the &lt;em&gt;think time&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;We have calculated all these numbers except the &lt;em&gt;service time&lt;/em&gt;. As mentioned before, this should be known for existing websites or should be relatively easy to obtain via the logs.  Another common practice is to perform benchmarking tests to obtain the average response time of each request when the system is under no load.  For this example we&amp;rsquo;ll assume that our service time is of &lt;em&gt;1 second&lt;/em&gt;.&lt;/p&gt;
 
@@ -367,7 +685,7 @@ NConc = 0.74 users&lt;/p&gt;
 
 &lt;p&gt;The calculated average concurrency is of &lt;em&gt;0.74&lt;/em&gt; users.  This makes sense given our numbers.  The cool thing about this formula is that we can simulate higher concurrency just by varying the &lt;em&gt;think time&lt;/em&gt;. As the think time is shortened, the concurrency increases. This is very useful when running our load tests because we are able to simulate higher loads in the system by using the same number of threads, hence saving computing resources.&lt;/p&gt;
 
-&lt;h3 id=&#34;writing-our-load-tests:c28dc0905f4751e20868ba42cc094c96&#34;&gt;Writing our load tests&lt;/h3&gt;
+&lt;h3 id=&#34;writing-our-load-tests&#34;&gt;Writing our load tests&lt;/h3&gt;
 
 &lt;p&gt;With the information we have we&amp;rsquo;re now ready to write our test scripts. The way we write our tests will vary depending on the tool we use (e.g. &lt;a href=&#34;http://jmeter.apache.org/&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;JMeter&lt;/em&gt;&lt;/a&gt; and &lt;a href=&#34;http://www.hpl.hp.com/research/linux/httperf/&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;httperf&lt;/em&gt;&lt;/a&gt; are both great open source tools). I&amp;rsquo;ll write about the creation of load tests in another article, but in a nutshell, you&amp;rsquo;ll need the following information:&lt;/p&gt;
 
@@ -376,7 +694,7 @@ NConc = 0.74 users&lt;/p&gt;
 &lt;li&gt;&lt;em&gt;Think time&lt;/em&gt;, or time to wait between requests.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;getting-your-graph:c28dc0905f4751e20868ba42cc094c96&#34;&gt;Getting your graph&lt;/h3&gt;
+&lt;h3 id=&#34;getting-your-graph&#34;&gt;Getting your graph&lt;/h3&gt;
 
 &lt;p&gt;What you&amp;rsquo;ll want to do is then run the load tests for some time to obtain average response times as well as &lt;em&gt;std. dev&lt;/em&gt;, &lt;em&gt;median&lt;/em&gt;, &lt;em&gt;90th&lt;/em&gt; and &lt;em&gt;99th&lt;/em&gt; percentiles. Five minutes is a good rule of thumb for running your load tests, but you might also consider running longer tests for stressing the system. Then, you&amp;rsquo;ll want to run your tests again using higher loads (e.g. by varying the &lt;em&gt;think time&lt;/em&gt; or number of threads).  You&amp;rsquo;ll want repeat this several times (e.g. 5 - 10 times) until you have enough data points to plot a nice graph.&lt;/p&gt;
 </description>
@@ -390,38 +708,38 @@ NConc = 0.74 users&lt;/p&gt;
       <guid>http://danielvalencia.me/articles/notes_on_continuous_delivery/</guid>
       <description>
 
-&lt;h3 id=&#34;only-build-your-binaries-once:25c5d87dd7a1a67a9e7f788e26731411&#34;&gt;Only Build Your Binaries Once&lt;/h3&gt;
+&lt;h3 id=&#34;only-build-your-binaries-once&#34;&gt;Only Build Your Binaries Once&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Reduce the risk of introducing difference on each build.&lt;/li&gt;
 &lt;li&gt;Takes time to compile code (specially in large systems)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;deploy-the-same-way-to-every-environment:25c5d87dd7a1a67a9e7f788e26731411&#34;&gt;Deploy the Same Way to Every Environment&lt;/h3&gt;
+&lt;h3 id=&#34;deploy-the-same-way-to-every-environment&#34;&gt;Deploy the Same Way to Every Environment&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Once you reach Production you are confident that your deployments work.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;smoke-test-your-deployments:25c5d87dd7a1a67a9e7f788e26731411&#34;&gt;Smoke-Test your Deployments&lt;/h3&gt;
+&lt;h3 id=&#34;smoke-test-your-deployments&#34;&gt;Smoke-Test your Deployments&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;After deploying, immediately make sure that the most basic functionality works as expected.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;deploy-into-a-copy-of-production:25c5d87dd7a1a67a9e7f788e26731411&#34;&gt;Deploy into a copy of Production&lt;/h3&gt;
+&lt;h3 id=&#34;deploy-into-a-copy-of-production&#34;&gt;Deploy into a copy of Production&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Make your environments a similar to production as pipeline.  Again, to reduce the risk of ofintroducing bugs.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;each-change-should-propagate-through-the-pipeline-instantly:25c5d87dd7a1a67a9e7f788e26731411&#34;&gt;Each Change Should Propagate through the Pipeline Instantly&lt;/h3&gt;
+&lt;h3 id=&#34;each-change-should-propagate-through-the-pipeline-instantly&#34;&gt;Each Change Should Propagate through the Pipeline Instantly&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Each checking should trigger the start of the build process.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;if-any-part-of-the-pipeline-fails-stop-the-line:25c5d87dd7a1a67a9e7f788e26731411&#34;&gt;If Any Part of the Pipeline Fails, Stop the Line&lt;/h3&gt;
+&lt;h3 id=&#34;if-any-part-of-the-pipeline-fails-stop-the-line&#34;&gt;If Any Part of the Pipeline Fails, Stop the Line&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Developers should make sure that their code didn&amp;rsquo;t break anything.  If it does, they should fix it immediately.&lt;/li&gt;

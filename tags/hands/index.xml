@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hands on a technology journal</title>
-    <link>http://danielvalencia.me/tags/hands/</link>
-    <description>Recent content in Hands on a technology journal</description>
+    <title>a technology journal</title>
+    <link>http://danielvalencia.me/tags/hands/index.xml</link>
+    <description>Recent content on a technology journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2013 10:56:50 -0700</lastBuildDate>
     <atom:link href="http://danielvalencia.me/tags/hands/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -19,7 +18,7 @@
 
 &lt;p&gt;I&amp;rsquo;m currently helping my friend Dave Gertler to build his Burning Man art installation which is called &lt;a href=&#34;http://handsburningman.blogspot.com/&#34;&gt;&lt;strong&gt;Hands&lt;/strong&gt;&lt;/a&gt;.  Specifically I&amp;rsquo;ll be focusing on the electronics, which is a fairly big chunk of work.  In this post I&amp;rsquo;ll introduce you to the project and show you some of the work we&amp;rsquo;ve been doing to make this a reality.&lt;/p&gt;
 
-&lt;h3 id=&#34;intro:deb9daccda79606df9da1aa7dd01da2c&#34;&gt;Intro&lt;/h3&gt;
+&lt;h3 id=&#34;intro&#34;&gt;Intro&lt;/h3&gt;
 
 &lt;p&gt;The installation consists of 2 hands with the palms facing upwards.  The hands will be made out of CDX plywood and the piece is designed to be assembled as a huge 3D jigsaw puzzle. In addition, multiple series of LEDs will illuminate the hands. Check out the following scale model to have a better idea of what it looks like:&lt;/p&gt;
 
@@ -36,7 +35,7 @@
 &lt;/tr&gt;
 &lt;/table&gt;
 
-&lt;h3 id=&#34;the-electronics:deb9daccda79606df9da1aa7dd01da2c&#34;&gt;The Electronics&lt;/h3&gt;
+&lt;h3 id=&#34;the-electronics&#34;&gt;The Electronics&lt;/h3&gt;
 
 &lt;p&gt;The idea is that these Hands are illuminated with a series of LEDs that are individually addressable and can be programmed with different algorithms, similar to the &lt;a href=&#34;https://vimeo.com/25870560&#34;&gt;Bay Bridge Lights&lt;/a&gt;. Ok, probably not as sophisticated as the Bay Bridge Lights, but you get the idea.&lt;/p&gt;
 
@@ -52,7 +51,7 @@
 
 &lt;iframe src=&#34;http://player.vimeo.com/video/61054270&#34; width=&#34;500&#34; height=&#34;282&#34; frameborder=&#34;0&#34; webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt;
 
-&lt;h3 id=&#34;features-and-human-interaction:deb9daccda79606df9da1aa7dd01da2c&#34;&gt;Features and Human Interaction&lt;/h3&gt;
+&lt;h3 id=&#34;features-and-human-interaction&#34;&gt;Features and Human Interaction&lt;/h3&gt;
 
 &lt;p&gt;Human interaction is key for any Burning Man art installation and &lt;em&gt;Hands&lt;/em&gt; is no exception.  We thought about different ways in which people could interact with the LEDs. One thought we explored is the ability to control the LEDs via an iPhone or iPod.&lt;/p&gt;
 

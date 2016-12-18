@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Javascript on a technology journal</title>
-    <link>http://danielvalencia.me/tags/javascript/</link>
-    <description>Recent content in Javascript on a technology journal</description>
+    <title>a technology journal</title>
+    <link>http://danielvalencia.me/tags/javascript/index.xml</link>
+    <description>Recent content on a technology journal</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Feb 2013 10:53:43 -0700</lastBuildDate>
     <atom:link href="http://danielvalencia.me/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -131,7 +130,7 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
 
 &lt;p&gt;Sick, right ?&lt;/p&gt;
 
-&lt;h3 id=&#34;so-how-to-solve-this:08f3ab03952d0fba6b0e56ee042251be&#34;&gt;So, how to solve this?&lt;/h3&gt;
+&lt;h3 id=&#34;so-how-to-solve-this&#34;&gt;So, how to solve this?&lt;/h3&gt;
 
 &lt;p&gt;The key is to create a new scope for the &lt;em&gt;config&lt;/em&gt; variable.  As I mentioned previously, Javascript creates a new scope each time a function is created, so we can leverage this in the following way:&lt;/p&gt;
 
@@ -154,7 +153,7 @@ The other day, as I was pair programming with my coworker, we ran into an issue 
 
 &lt;p&gt;Interesting, right ?&lt;/p&gt;
 
-&lt;h3 id=&#34;conclusion:08f3ab03952d0fba6b0e56ee042251be&#34;&gt;Conclusion&lt;/h3&gt;
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
 
 &lt;p&gt;Lots of languages have closures: obviously functional languages such as Scala, Haskell, Clojure, etc, but also Object Oriented languages such as Ruby, Python, and C#.  Even in Java you can achieve similar functionality with anonymous inner classes.  In all of these languages though, new scopes are created within blocks such as &lt;em&gt;for&lt;/em&gt; and &lt;em&gt;while&lt;/em&gt; loops.&lt;/p&gt;
 
