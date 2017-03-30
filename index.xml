@@ -96,7 +96,7 @@
 &lt;/pre&gt;
 In this example, the _referencing environment_ corresponds to the _outerVar_ variable, and the closure is the function that&#39;s assigned to the _document.onload_ event property.   The result of this example is a &#34;Hello World&#34; message printed in the console when the document is loaded.  
 
-You might not be impressed by any of this, as this is a pretty trivial example.  The interesting thing to understand about closures lies not so much in the ability to treat functions as variables, but rather in the context (or _referencing environment_) that these functions can _reference_ in a future point in time.
+You might not be impressed by any of this, as this is a pretty trivial example.  The interesting thing to understand about closures lies not so much in the ability to treat functions as variables, but rather in the context (or _referencing environment_) that these functions can _reference_ in a future point in time.  
 
 ### A True Story about Closures
 
@@ -451,12 +451,27 @@ NConc = 0.74 users&lt;/p&gt;
 Some of my main accomplishments during my tenure as VP include:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Work with the leads of the different teams to solve engineering and people related issues.&lt;/li&gt;
 &lt;li&gt;Worked closely with the CTO and directors to define our corporate strategy.&lt;/li&gt;
+&lt;li&gt;Work with the leads of the different teams to solve engineering and people related issues.&lt;/li&gt;
 &lt;li&gt;Re-engage employee collaboration and knowledge-sharing by implementing weekly lunch and learn sessions.&lt;/li&gt;
 &lt;li&gt;Led the implementation of a company wide Tacit Knowledge blog.&lt;/li&gt;
 &lt;li&gt;Improved our local community presence by co-organizing the local Java User Group meetup.&lt;/li&gt;
 &lt;li&gt;Participated in multiple speaking engagements in the local JUG community and the eCommerce community.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&#34;project-brooklyn-loblaws&#34;&gt;Project Brooklyn, Loblaws&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Consolidation of multiple legacy loyalty programs into a single unified one.&lt;/li&gt;
+&lt;li&gt;Architecture for new offers and account management sections for &lt;em&gt;beautyboutique.com&lt;/em&gt; using ReactJS.&lt;/li&gt;
+&lt;li&gt;Design and implementation for the following functionality:
+
+&lt;ul&gt;
+&lt;li&gt;Loyalty point redemption during checkout process.&lt;/li&gt;
+&lt;li&gt;CSV report generation for returns and partial shipments.&lt;/li&gt;
+&lt;li&gt;API for accessing CMS content from React app.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Mentoring and guidance to more junior members of team.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h5 id=&#34;returns-plus-newgistics&#34;&gt;Returns Plus, Newgistics&lt;/h5&gt;
