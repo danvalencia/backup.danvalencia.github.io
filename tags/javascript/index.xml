@@ -34,7 +34,7 @@
 &lt;/pre&gt;
 In this example, the _referencing environment_ corresponds to the _outerVar_ variable, and the closure is the function that&#39;s assigned to the _document.onload_ event property.   The result of this example is a &#34;Hello World&#34; message printed in the console when the document is loaded.  
 
-You might not be impressed by any of this, as this is a pretty trivial example.  The interesting thing to understand about closures lies not so much in the ability to treat functions as variables, but rather in the context (or _referencing environment_) that these functions can _reference_ in a future point in time.
+You might not be impressed by any of this, as this is a pretty trivial example.  The interesting thing to understand about closures lies not so much in the ability to treat functions as variables, but rather in the context (or _referencing environment_) that these functions can _reference_ in a future point in time.  
 
 ### A True Story about Closures
 

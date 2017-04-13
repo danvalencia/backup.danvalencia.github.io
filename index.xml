@@ -459,14 +459,15 @@ Some of my main accomplishments during my tenure as VP include:&lt;/p&gt;
 &lt;li&gt;Participated in multiple speaking engagements in the local JUG community and the eCommerce community.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h5 id=&#34;project-brooklyn-loblaws&#34;&gt;Project Brooklyn, Loblaws&lt;/h5&gt;
+&lt;h5 id=&#34;project-x-major-retailer&#34;&gt;Project X, Major Retailer&lt;/h5&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Consolidation of multiple legacy loyalty programs into a single unified one.&lt;/li&gt;
-&lt;li&gt;Architecture for new offers and account management sections for &lt;em&gt;beautyboutique.com&lt;/em&gt; using ReactJS.&lt;/li&gt;
-&lt;li&gt;Design and implementation for the following functionality:
+&lt;li&gt;Architecture for new offers and account management sections for &lt;em&gt;major retailer website&lt;/em&gt; using ReactJS.&lt;/li&gt;
+&lt;li&gt;Tech led design and implementation for the following functionality:
 
 &lt;ul&gt;
+&lt;li&gt;Front-end architecture using ReactJS, React Router and RequireJS.&lt;/li&gt;
 &lt;li&gt;Loyalty point redemption during checkout process.&lt;/li&gt;
 &lt;li&gt;CSV report generation for returns and partial shipments.&lt;/li&gt;
 &lt;li&gt;API for accessing CMS content from React app.&lt;/li&gt;
